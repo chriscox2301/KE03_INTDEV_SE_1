@@ -33,10 +33,24 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Orders
         public IActionResult OnPost()
         {
             //TODO: maak een nieuwe Order aan
+            var order = new Order
+            {
+                CustomerId = CustomerId,
+                OrderDate = DateTime.Now
+            };
             //TODO: zoek de geselecteerde producten op via SelectedProductIds
             //TODO: voeg ze toe aan de order en sla op
+            foreach (var productId in SelectedProductIds)
+            {
+                var product = _productRepository.GetProductById(productId);
+                if (product != null)
+                {
+                    order.Products.Add(product);
+                }
+            }
+            _orderRepository.AddOrder(order);
             //TODO: redirect naar History pagina
-            return Page();
+            return RedirectToPage("/Orders/History", new { customerId = CustomerId });
         }
     }
 }

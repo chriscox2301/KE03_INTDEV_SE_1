@@ -1,4 +1,31 @@
 ﻿@page
 @model KE03_INTDEV_SE_1_Base.Pages.Orders.HistoryModel
 @{
+    ViewData["Title"] = "Bestelhistorie";
+}
+
+<h2>Bestellingen van @Model.Customer?.Name</h2>
+
+@if (!Model.Orders.Any())
+{
+    <p>Geen bestellingen gevonden</p>    
+}
+else{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order #</th>
+                <th>Datum</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.OrderDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

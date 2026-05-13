@@ -8,13 +8,20 @@
         <tr>
             <th>Klant</th>
             <th>Aantal Orders</th>
+            <th>Acties</th>
         </tr>
     </thead>
-    @foreach (var c in Model.Customers)
-    {        
-        <tr>
-            <td>@Html.DisplayName(c.Name)</td>
-            <td>@Html.DisplayName(c.Orders.Count.ToString())</td>           
-        </tr>
-    }
+    <tbody>
+        @foreach (var customer in Model.Customers)
+        {
+            <tr>
+                <td>@customer.Name</td>
+                <td>@customer.Orders.Count()</td>
+                <td>
+                    <a asp-page="/Orders/Place" asp-route-customerId="@customer.Id" class="btn btn-primary">Bestelling plaatsen</a>
+                    <a asp-page="/Orders/History" asp-route-customerId="@customer.Id" class="btn btn-secondary">Bestelhistorie</a>
+                </td>
+            </tr>
+            }
+    </tbody>
 </table>
