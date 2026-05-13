@@ -1,0 +1,26 @@
+﻿@page
+@model PlaceModel
+@{
+    ViewData["Title"] = "Orders";
+}
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Klant</th>
+            @* TODO: voeg hier meer kolommen toe die je wil tonen *@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.Customer?.Name</td>
+                @* TODO: voeg hier meer cellen toe *@
+            </tr>
+        }
+    </tbody>
+</table>
