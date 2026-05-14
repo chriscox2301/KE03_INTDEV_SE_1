@@ -11,9 +11,39 @@
     <p class="text-muted">Klant: @Model.Customer?.Name</p>
 </div>
 
-<h3>Nieuwe bestelling</h3>
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h5 class="mb-0">Selecteer producten</h5>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" asp-for="CustomerId" />
+            <div class="list-group mb-4">
+                @foreach (var product in Model.Products)
+                {
+                    <label class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-3">
+                            <input type="checkbox"
+                                   class="form-check-input"
+                                   name="SelectedProductIds"
+                                   value="@product.Id"
+                                   id="product_@product.Id" />
+                            <span>@product.Name</span>
+                        </div>
+                        <span class="badge bg-primary rounded-pill">€@product.Price</span>
+                    </label>
+                }
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-cart-check"></i> Bestelling plaatsen
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
-<form method="post">
+@* <form method="post">
     <input type="hidden" asp-for="CustomerId" />
     <h4>Selecteer producten:</h4>
     @foreach (var product in Model.Products)
@@ -24,4 +54,4 @@
         </div>
     }
     <button type="submit" class="btn btn-primary">Bestelling plaatsen</button>
-</form>
+</form> *@
