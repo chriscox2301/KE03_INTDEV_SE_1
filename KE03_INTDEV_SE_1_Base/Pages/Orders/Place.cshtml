@@ -3,7 +3,15 @@
 @{
     ViewData["Title"] = "Bestelling plaatsen";
 }
-<h2>Bestelling voor @Model.Customer?.Name</h2>
+
+<button class="btn btn-secondary" onclick="history.back()"><i class="bi bi-arrow-left"></i> Terug</button>
+
+<div class="mb-4">
+    <h2 class="mb-2">Bestelling plaatsen</h2>
+    <p class="text-muted">Klant: @Model.Customer?.Name</p>
+</div>
+
+<h3>Nieuwe bestelling</h3>
 
 <form method="post">
     <input type="hidden" asp-for="CustomerId" />
