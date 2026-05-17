@@ -18,20 +18,24 @@
     <div class="card-body">
         <form method="post">
             <input type="hidden" asp-for="CustomerId" />
-            <div class="list-group mb-4">
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3">
                 @foreach (var product in Model.Products)
                 {
-                    <label class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center gap-3">
-                            <input type="checkbox"
-                                   class="form-check-input"
-                                   name="SelectedProductIds"
-                                   value="@product.Id"
-                                   id="product_@product.Id" />
-                            <span>@product.Name</span>
+                    <div class="col">
+                        <label for="product_@product.Id" class="h-100 d-block" style="cursor: pointer;">
+                        <div class="card h-100">
+                            @* plaatje hier *@
+                            <div class="card-body">
+                                <h6 class="card-title">@product.Name</h6>
+                                <p class="card-text text-muted small">@product.Description</p>
+                            </div>
+
+                            <div class="card-footer">
+                                <strong class="text-primary">€@product.Price</strong>
+                                <input type="checkbox" name="SelectedProductIds" value="@product.Id" id="product_@product.Id" />
+                            </div>
                         </div>
-                        <span class="badge bg-primary rounded-pill">€@product.Price</span>
-                    </label>
+                    </div>
                 }
             </div>
             <div class="d-flex justify-content-end">
