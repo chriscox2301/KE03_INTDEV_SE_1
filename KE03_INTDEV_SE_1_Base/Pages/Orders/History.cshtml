@@ -4,6 +4,7 @@
     ViewData["Title"] = "Bestelhistorie";
 }
 
+<button class="btn btn-secondary" onclick="history.back()"><i class="bi bi-arrow-left"></i> Terug</button>
 <h2>Bestellingen van @Model.Customer?.Name</h2>
 
 @if (!Model.Orders.Any())
@@ -11,21 +12,34 @@
     <p>Geen bestellingen gevonden</p>    
 }
 else{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Order #</th>
-                <th>Datum</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var order in Model.Orders)
-            {
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead class="table-dark">
                 <tr>
-                    <td>@order.Id</td>
-                    <td>@order.OrderDate.ToShortDateString()</td>
+                    <th>Order #</th>
+                    <th>Datum</th>
+                    <th>Producten</th>
+                    <th>Totaalbedrag</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.OrderDate.ToShortDateString()</td>
+                        <td>
+                            <ul class="list-unstyled mb-0">
+                            @foreach (var product in order.Products)
+                            {
+                                <li><i class="bi bi-box"></i> @product.Name - <strong class="text-primary">€@product.Price</strong></li>
+                            }
+                            </ul>
+                        </td>
+                        <td><strong class="text-primary">€@order.Products.Sum(p => p.Price)</strong></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }

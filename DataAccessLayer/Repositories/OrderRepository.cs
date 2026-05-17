@@ -39,7 +39,8 @@ namespace DataAccessLayer.Repositories
         {
             return _context.Orders
                 .Where(o => o.CustomerId == customerId)
-                .Include(o => o.Customer);
+                .Include(o => o.Customer)
+                .Include(o => o.Products);
         }
 
         public Order? GetOrderById(int id)
