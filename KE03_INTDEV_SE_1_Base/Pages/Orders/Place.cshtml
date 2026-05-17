@@ -23,18 +23,19 @@
                 {
                     <div class="col">
                         <label for="product_@product.Id" class="h-100 d-block" style="cursor: pointer;">
-                        <div class="card h-100">
-                            @* plaatje hier *@
-                            <div class="card-body">
-                                <h6 class="card-title">@product.Name</h6>
-                                <p class="card-text text-muted small">@product.Description</p>
+                            <div class="card h-100">
+                                @* plaatje hier *@
+                                <img src="/images/products/@(product.Id).jpg" class="card-img-top" />
+                                <div class="card-body">
+                                    <h6 class="card-title">@product.Name</h6>
+                                    <p class="card-text text-muted small">@product.Description</p>
+                                </div>
+                                <div class="card-footer">
+                                    <strong class="text-primary">€@product.Price</strong>
+                                    <input type="checkbox" name="SelectedProductIds" value="@product.Id" id="product_@product.Id" />
+                                </div>
                             </div>
-
-                            <div class="card-footer">
-                                <strong class="text-primary">€@product.Price</strong>
-                                <input type="checkbox" name="SelectedProductIds" value="@product.Id" id="product_@product.Id" />
-                            </div>
-                        </div>
+                        </label>
                     </div>
                 }
             </div>
