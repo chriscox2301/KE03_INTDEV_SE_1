@@ -1,0 +1,30 @@
+﻿@page "{orderId:int}"
+@model KE03_INTDEV_SE_1_Base.Pages.Orders.ConfirmationModel
+@{ ViewData["Title"] = "Bestelling bevestigd"; }
+
+<div class="text-center my-5">
+    <i class="bi bi-check-circle text-success" style="font-size: 4rem;"></i>
+    <h2 class="mt-3">Bedankt voor je bestelling!</h2>
+    <p class="text-muted">Order #@Model.Order?.Id - @Model.Order?.OrderDate.ToShortDateString()</p>
+</div>
+
+<ul class="list-group mb-4">
+    @foreach (var product in Model.Order?.Products ?? [])
+    {
+        <li class="list-group-item d-flex justify-content-between">
+            <span><i class="bi bi-box"></i> @product.Name</span>
+            <strong class="text-primary">€@product.Price</strong>
+        </li>
+    }
+</ul>
+
+<div class="d-flex gap-2 justify-content-center">
+    <a asp-page="/Index" class="btn btn-outline-secondary">
+        <i class="bi bi-house"></i> Hoofdmenu
+    </a>
+    <a asp-page="/Orders/History" asp-route-customerId="@Model.Order?.CustomerId" class="btn
+  btn-primary">
+        <i class="bi bi-list"></i> Bestelhistorie
+    </a>
+</div>
+

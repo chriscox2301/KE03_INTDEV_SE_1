@@ -32,14 +32,11 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Orders
 
         public IActionResult OnPost()
         {
-            //TODO: maak een nieuwe Order aan
             var order = new Order
             {
                 CustomerId = CustomerId,
                 OrderDate = DateTime.Now
             };
-            //TODO: zoek de geselecteerde producten op via SelectedProductIds
-            //TODO: voeg ze toe aan de order en sla op
             foreach (var productId in SelectedProductIds)
             {
                 var product = _productRepository.GetProductById(productId);
@@ -49,8 +46,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Orders
                 }
             }
             _orderRepository.AddOrder(order);
-            //TODO: redirect naar History pagina
-            return RedirectToPage("/Orders/History", new { customerId = CustomerId });
+            return RedirectToPage("/Orders/Confirmation", new { orderId = order.Id });
         }
     }
 }
