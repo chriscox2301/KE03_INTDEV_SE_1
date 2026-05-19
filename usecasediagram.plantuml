@@ -1,0 +1,15 @@
+@startuml
+
+left to right direction
+
+actor "Klant" as klant
+
+rectangle "Bestel Applicatie" {
+    usecase "UC1: Klant plaatst een bestelling" as UC1
+    usecase "UC2: Klant bekijkt orderhistorie" as UC2
+}
+
+klant --> UC1
+klant --> UC2
+
+@enduml
