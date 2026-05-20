@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <strong class="text-primary">€@product.Price</strong>
-                                    <input type="checkbox" name="SelectedProductIds" value="@product.Id" id="product_@product.Id" data-price="@product.Price"/>
+                                    <input type="number" name="ProductQuantities[@product.Id]" value="0" min="0" id="product_@product.Id" data-price="@product.Price"/>
                                 </div>
                             </div>
                         </label>

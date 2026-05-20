@@ -12,7 +12,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Orders
         private readonly ICustomerRepository _customerRepository;
 
         [BindProperty] public int CustomerId { get; set; }
-        [BindProperty] public List<int> SelectedProductIds { get; set; }
+        [BindProperty] public Dictionary<int, int> ProductQuantities { get; set; } = new();
 
 
         public Customer? Customer { get; set; }
@@ -37,12 +37,15 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Orders
                 CustomerId = CustomerId,
                 OrderDate = DateTime.Now
             };
-            foreach (var productId in SelectedProductIds)
+            foreach (var (productId, quantity) in ProductQuantities)
             {
                 var product = _productRepository.GetProductById(productId);
                 if (product != null)
                 {
-                    order.Products.Add(product);
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        order.Products.Add(product);
+                    }
                 }
             }
             _orderRepository.AddOrder(order);
