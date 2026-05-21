@@ -1,0 +1,35 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.Cart.CheckoutModel
+@{
+    ViewData["Title"] = "Afrekenen";
+}
+
+<h2>Afrekenen</h2>
+
+<h5>Jouw Bestelling</h5>
+<ul class="list-group mb-3">
+    @foreach (var item in Model.CartItems)
+    {
+        <li class="list-group-item d-flex justify-content-between">
+            <span>@item.Name</span>
+            <strong>€@item.Price</strong>
+        </li>
+    }
+</ul>
+<p><strong>Totaal: €@Model.CartItems.Sum(i => i.Price)</strong></p>
+
+<hr />
+<h5>Wie ben jij?</h5>
+<form method="post">
+    <div class="mb-3">
+        <select asp-for="SelectedCustomerId" class="form-select">
+            @foreach (var customer in Model.Customers)
+            {
+                <option value="@customer.Id">@customer.Name</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success btn-lg">
+        <i class="bi bi-credit-card"></i> Betalen
+    </button>
+</form>

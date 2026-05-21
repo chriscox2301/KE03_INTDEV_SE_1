@@ -24,7 +24,7 @@ namespace KE03_INTDEV_SE_1_Base
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-
+            builder.Services.AddSession();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -50,6 +50,7 @@ namespace KE03_INTDEV_SE_1_Base
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.MapRazorPages();
 

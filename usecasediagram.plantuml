@@ -5,11 +5,22 @@ left to right direction
 actor "Klant" as klant
 
 rectangle "Bestel Applicatie" {
-    usecase "UC1: Klant plaatst een bestelling" as UC1
-    usecase "UC2: Klant bekijkt orderhistorie" as UC2
+    usecase "UC1: Profiel beheren" as UC1
+    usecase "UC2: Product bekijken" as UC2
+    usecase "UC3: Categorieën bekijken" as UC3
+    usecase "UC4: Favoriet beheren" as UC4
+    usecase "UC5: Winkelwagen beheren" as UC5
+    usecase "UC6: Actie bekijken" as UC6
+    usecase "UC7: Bestelling beheren" as UC7
+    usecase "UC8: Bestel geschiedenis" as UC8
 }
 
 klant -- UC1
 klant -- UC2
-
+klant -- UC3
+klant -- UC4 
+klant -- UC5 
+klant -- UC6 
+klant -- UC7 
+klant -- UC8 
 @enduml

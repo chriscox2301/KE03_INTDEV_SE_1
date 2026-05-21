@@ -70,4 +70,4 @@ Dit project is een startpunt voor de eerste inleveropdracht voor alle studenten 
 | Alternatieve scenario's | 1,2a<br>1,2,3a                                                                                                    |                                                                             |
 
 # Use case diagram
-![alt text](image-1.png)
+![alt text](image.png)

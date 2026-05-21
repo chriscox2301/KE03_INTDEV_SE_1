@@ -1,0 +1,30 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.Cart.IndexModel
+@{
+    ViewData["Title"] = "Winkelmandje";
+}
+
+<h2>Winkelmandje</h2>
+
+@if (!Model.CartItems.Any())
+{
+    <p>Uw winkelmandje is leeg. <a asp-page="/Index">Terug naar winkel</a></p>
+}
+else
+{
+    <ul class="list-group mb-3">
+        @foreach (var item in Model.CartItems)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>@item.Name</strong> - €@item.Price</span>
+                <form method="post" asp-page-handler="Remove">
+                    <input type="hidden" name="productId" value="@item.Id" />
+                    <button class="btn btn btn-outline-danger">Verwijder</button>
+                </form>
+            </li>
+        }
+    </ul>
+    <strong>Totaal: €@Model.CartItems.Sum(p => p.Price)</strong>
+    <br /><br />
+    <a asp-page="/Cart/Checkout" class="btn btn-success">Afrekenen</a>
+}
