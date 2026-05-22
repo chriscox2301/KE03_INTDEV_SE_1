@@ -9,13 +9,17 @@
 </div>
 
 <ul class="list-group mb-4">
-    @foreach (var product in Model.Order?.Products ?? [])
+    @foreach (var line in Model.Order?.OrderLines ?? [])
     {
         <li class="list-group-item d-flex justify-content-between">
-            <span><i class="bi bi-box"></i> @product.Name</span>
-            <strong class="text-primary">€@product.Price</strong>
+            <span><i class="bi bi-box"></i> @line.Product.Name x @line.Quantity</span>
+            <strong class="text-primary">€@(line.Quantity * line.UnitPrice)</strong>
         </li>
     }
+    <li class="list-group-item d-flex justify-content-between fw-bold">
+        <span>Totaal</span>
+        <span class="text-primary">€@(Model.Order?.OrderLines.Sum(l => l.Quantity * l.UnitPrice) ?? 0)</span>
+    </li>
 </ul>
 
 <div class="d-flex gap-2 justify-content-center">

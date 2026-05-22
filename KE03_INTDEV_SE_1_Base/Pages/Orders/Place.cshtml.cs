@@ -2,6 +2,7 @@
 using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
 
 namespace KE03_INTDEV_SE_1_Base.Pages.Orders
 {
@@ -42,10 +43,12 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Orders
                 var product = _productRepository.GetProductById(productId);
                 if (product != null)
                 {
-                    for (int i = 0; i < quantity; i++)
+                    order.OrderLines.Add(new OrderLine
                     {
-                        order.Products.Add(product);
-                    }
+                        ProductId = product.Id,
+                        Quantity = quantity,
+                        UnitPrice = product.Price
+                    });
                 }
             }
             _orderRepository.AddOrder(order);

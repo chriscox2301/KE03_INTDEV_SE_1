@@ -2,6 +2,7 @@ using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
 
 namespace KE03_INTDEV_SE_1_Base.Pages.Cart
 {
@@ -47,10 +48,18 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Cart
                 CustomerId = SelectedCustomerId,
                 OrderDate = DateTime.Now
             };
-            foreach (var id in ids)
+            foreach (var group in ids.GroupBy(id => id))
             {
-                var product = _productRepository.GetProductById(id);
-                if (product != null) order.Products.Add(product);
+                var product = _productRepository.GetProductById(group.Key);
+                if (product != null)
+                {
+                    order.OrderLines.Add(new OrderLine
+                    {
+                        ProductId = product.Id,
+                        Quantity = group.Count(),
+                        UnitPrice = product.Price
+                    });
+                }
             }
             _orderRepository.AddOrder(order);
             HttpContext.Session.Remove("cart");

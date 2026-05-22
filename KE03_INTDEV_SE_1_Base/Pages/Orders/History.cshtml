@@ -30,13 +30,13 @@ else{
                         <td>@order.OrderDate.ToShortDateString()</td>
                         <td>
                             <ul class="list-unstyled mb-0">
-                            @foreach (var product in order.Products)
+                            @foreach (var line in order.OrderLines)
                             {
-                                <li><i class="bi bi-box"></i> @product.Name - <strong class="text-primary">€@product.Price</strong></li>
+                                <li><i class="bi bi-box"></i> @line.Product.Name x @line.Quantity - <strong class="text-primary">€@(line.Quantity * line.UnitPrice)</strong></li>
                             }
                             </ul>
                         </td>
-                        <td><strong class="text-primary">€@order.Products.Sum(p => p.Price)</strong></td>
+                        <td><strong class="text-primary">€@order.OrderLines.Sum(l => l.Quantity * l.UnitPrice)</strong></td>
                     </tr>
                 }
             </tbody>
